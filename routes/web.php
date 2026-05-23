@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AdminProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+// Admin Paneli Rotaları
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Kategori işlemleri (admin/category/...)
+    Route::resource('category', CategoryController::class);
+    
+    // Ürün işlemleri (admin/product/...)
+    Route::resource('product', AdminProductController::class);
 });
