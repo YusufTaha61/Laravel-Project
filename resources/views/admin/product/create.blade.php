@@ -51,7 +51,7 @@
         <div class="form-group">
             <label>Ürün Durumu:</label>
             <select name="status">
-                <option value="1">Aktif (Vitrinde Göster)</option>
+                <option value="1" selected>Aktif (Vitrinde Göster)</option> 
                 <option value="0">Pasif (Gizle)</option>
             </select>
         </div>

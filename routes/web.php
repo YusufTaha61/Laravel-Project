@@ -23,6 +23,8 @@ use App\Http\Controllers\HomeController;
 // YENİ HALİ: Siteye ilk girildiğinde HomeController çalışsın
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/product/{id}', [HomeController::class, 'detail'])->name('product.detail');
+
 // Admin Paneli Rotaları
 Route::prefix('admin')->name('admin.')->group(function () {
     // Kategori işlemleri (admin/category/...)

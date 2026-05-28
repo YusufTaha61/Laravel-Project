@@ -13,4 +13,10 @@ class HomeController extends Controller
         
         return view('home', compact('products'));
     }
+
+    public function detail($id)
+    {
+        $data = Product::find($id); // Tıklanan kahveyi ID'sinden veritabanında bulur
+        return view('product_detail', compact('data')); // Detay sayfasına veriyi gönderir
+    }
 }
