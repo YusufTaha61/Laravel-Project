@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminProductController;
 
+use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,9 +18,10 @@ use App\Http\Controllers\Admin\AdminProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+// YENİ HALİ: Siteye ilk girildiğinde HomeController çalışsın
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Admin Paneli Rotaları
 Route::prefix('admin')->name('admin.')->group(function () {

@@ -66,6 +66,7 @@ class AdminProductController extends Controller
         $data->title = $request->title;
         $data->price = $request->price;
         $data->stock = $request->stock ?? 0;
+        $data->status = $request->status ? 1 : 0;
 
         if ($request->file('image')) {
             $file = $request->file('image');
