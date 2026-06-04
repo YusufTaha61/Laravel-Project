@@ -9,6 +9,19 @@
     </style>
 </head>
 <body>
+    <div style="text-align: right; padding: 15px;">
+        @if (Route::has('login'))
+            @auth
+                <a href="{{ url('/dashboard') }}" style="text-decoration: none; color: #333; font-weight: bold;">Dashboard (Yönetim Paneli)</a>
+            @else
+                <a href="{{ route('login') }}" style="text-decoration: none; color: #333; font-weight: bold;">Log in (Giriş)</a>
+
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" style="margin-left: 20px; text-decoration: none; color: #333; font-weight: bold;">Register (Kayıt Ol)</a>
+                @endif
+            @endauth
+        @endif
+    </div>
     <h1>☕ Kahve Dükkanımıza Hoş Geldiniz!</h1>
     <p>İşte en taze ürünlerimiz:</p>
 

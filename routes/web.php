@@ -1,35 +1,33 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\AdminProductController;
-
-use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
+// --- 1. BİZİM E-TİCARET VİTRİN ROTALARIMIZ ---
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/product/{id}', [\App\Http\Controllers\HomeController::class, 'detail'])->name('product.detail');
 
-
-// YENİ HALİ: Siteye ilk girildiğinde HomeController çalışsın
-Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::get('/product/{id}', [HomeController::class, 'detail'])->name('product.detail');
-
-// Admin Paneli Rotaları
-Route::prefix('admin')->name('admin.')->group(function () {
-    // Kategori işlemleri (admin/category/...)
-    Route::resource('category', CategoryController::class);
-    
-    // Ürün işlemleri (admin/product/...)
-    Route::resource('product', AdminProductController::class);
+// --- 2. BİZİM ADMİN PANELİ ROTALARIMIZ ---
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+    Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('product', \App\Http\Controllers\Admin\AdminProductController::class);
 });
+
+// --- 3. BREEZE GÜVENLİK VE PROFİL ROTALARI (Yeni Eklenenler) ---
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

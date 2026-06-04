@@ -19,7 +19,7 @@
 <body>
 
     <div style="max-width: 900px; margin: 0 auto;">
-        <a href="{{ route('home') }}" class="btn-back">← Anasayfaya Dön</a>
+        <a href="{{ url('/') }}" class="btn-back">Geri Dön</a>
     </div>
 
     <div class="container">
