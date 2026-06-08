@@ -20,9 +20,10 @@ class HomeController extends Controller
         }
 
         // 2. Admin Kontrolü ve Siparişleri Çekme
+        // 2. Admin Kontrolü ve Siparişleri Çekme (Son 5 Sipariş)
         $orders = [];
         if (auth()->check() && auth()->user()->role == 'admin') {
-            $orders = Order::all(); 
+            $orders = Order::orderBy('id', 'desc')->take(5)->get(); 
         }
         
         return view('home', compact('products', 'orders'));

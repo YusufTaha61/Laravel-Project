@@ -52,6 +52,12 @@
 
 <div class="container">
 
+    <div style="text-align: left; margin-bottom: 20px;">
+        <a href="{{ url()->previous() }}" style="text-decoration: none; color: #5d4037; font-weight: 600; font-size: 14px; background: #efebe9; padding: 8px 15px; border-radius: 20px; display: inline-block;">
+            ⬅ Geri Dön
+        </a>
+    </div>
+
     <div class="header-area">
         <h2>Sipariş Detayı #{{ $order->id }}</h2>
         <a href="{{ route('admin.orders.index') }}" class="btn-secondary">&larr; Sipariş Listesine Dön</a>

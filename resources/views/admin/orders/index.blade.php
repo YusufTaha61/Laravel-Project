@@ -35,6 +35,13 @@
 <body>
 
 <div class="container">
+    
+    <div style="text-align: left; margin-bottom: 20px;">
+        <a href="{{ route('home') }}" style="text-decoration: none; color: #5d4037; font-weight: 600; font-size: 14px; background: #efebe9; padding: 8px 15px; border-radius: 20px; display: inline-block;">
+            ⬅ Ana Sayfaya Dön
+        </a>
+    </div>
+
     <h2>Gelen Siparişler</h2>
 
     @if(session('success'))

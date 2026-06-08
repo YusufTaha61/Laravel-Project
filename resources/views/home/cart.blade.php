@@ -31,8 +31,10 @@
 </head>
 <body>
 
-    <div style="max-width: 1000px; margin: 0 auto;">
-        <a href="{{ url('/') }}" class="btn-back">&larr; Alışverişe Dön</a>
+    <div style="text-align: left; margin: 20px 40px;">
+        <a href="{{ url()->previous() }}" style="text-decoration: none; color: #5d4037; font-weight: 600; font-size: 14px; background: #efebe9; padding: 8px 15px; border-radius: 20px; display: inline-block;">
+            ⬅ Geri Dön
+        </a>
     </div>
 
     <div class="container">
