@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Hesabım') }}
         </h2>
     </x-slot>
 
@@ -16,7 +16,7 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+                    {{ __("Sisteme başarıyla giriş yaptınız!") }}
                     
                     <div style="margin-top: 20px;">
                         <a href="{{ route('home') }}" style="padding: 12px 24px; background-color: #795548; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block;">

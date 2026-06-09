@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            
+            // BURAYI EKLEDİK: Hem role sütununu oluşturur hem de varsayılan olarak 'user' (müşteri) yapar.
+            $table->string('role')->default('user');
+            
             $table->rememberToken();
             $table->timestamps();
         });

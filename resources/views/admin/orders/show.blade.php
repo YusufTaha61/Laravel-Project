@@ -53,14 +53,14 @@
 <div class="container">
 
     <div style="text-align: left; margin-bottom: 20px;">
-        <a href="{{ url()->previous() }}" style="text-decoration: none; color: #5d4037; font-weight: 600; font-size: 14px; background: #efebe9; padding: 8px 15px; border-radius: 20px; display: inline-block;">
-            ⬅ Geri Dön
+        <a href="{{ route('admin.orders.index') }}" style="text-decoration: none; color: #5d4037; font-weight: 600; font-size: 14px; background: #efebe9; padding: 8px 15px; border-radius: 20px; display: inline-block;">
+            ⬅ Tüm Siparişlere Dön
         </a>
     </div>
 
     <div class="header-area">
         <h2>Sipariş Detayı #{{ $order->id }}</h2>
-        <a href="{{ route('admin.orders.index') }}" class="btn-secondary">&larr; Sipariş Listesine Dön</a>
+        <a href="{{ route('admin.orders.index') }}" class="btn-secondary">&larr; Sipariş Listesi</a>
     </div>
 
     @if(session('success'))
@@ -72,7 +72,7 @@
     <div class="row">
         <div class="col-6">
             <div class="card">
-                <div class="card-header">Müşteri Bilgileri</div>
+                <div class="card-header">👤 Müşteri Bilgileri</div>
                 <div class="card-body" style="padding: 0;">
                     <table class="info-table">
                         <tr><th>Ad Soyad</th><td>{{ $order->name }}</td></tr>
@@ -88,7 +88,7 @@
 
         <div class="col-6">
             <div class="card">
-                <div class="card-header">Sipariş Bilgileri</div>
+                <div class="card-header">📦 Sipariş Bilgileri</div>
                 <div class="card-body" style="padding: 0;">
                     <table class="info-table">
                         <tr>
@@ -103,21 +103,37 @@
                                 @endif
                             </td>
                         </tr>
-                        <tr><th>Ödeme Yöntemi</th><td>{{ $order->payment_method }}</td></tr>
-                        <tr><th>Kargo Yöntemi</th><td>{{ $order->shipping_method }}</td></tr>
+                        <tr>
+                            <th>Ödeme Yöntemi</th>
+                            <td>
+                                @if($order->payment_method == 'Cash on Delivery') Kapıda Ödeme
+                                @elseif($order->payment_method == 'Credit Card') Kredi Kartı
+                                @else {{ $order->payment_method }}
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Kargo Yöntemi</th>
+                            <td>
+                                @if($order->shipping_method == 'Free Shipping') Ücretsiz Kargo
+                                @elseif($order->shipping_method == 'Standard Shipping') Standart Kargo
+                                @else {{ $order->shipping_method }}
+                                @endif
+                            </td>
+                        </tr>
                         <tr><th>Sipariş Tarihi</th><td>{{ $order->created_at->format('d/m/Y H:i') }}</td></tr>
                     </table>
                     
                     <form action="{{ route('admin.orders.updateStatus', $order->id) }}" method="POST" class="status-form">
                         @csrf
                         <select name="status" class="form-control">
-                            @foreach ($statuses as $status)
-                                <option value="{{ $status }}" {{ $order->status == $status ? 'selected' : '' }}>
-                                    {{ $status }}
-                                </option>
-                            @endforeach
+                            <option value="New" {{ $order->status == 'New' ? 'selected' : '' }}>Yeni Sipariş</option>
+                            <option value="Accepted" {{ $order->status == 'Accepted' ? 'selected' : '' }}>Onaylandı</option>
+                            <option value="Onshipping" {{ $order->status == 'Onshipping' ? 'selected' : '' }}>Kargoda</option>
+                            <option value="Completed" {{ $order->status == 'Completed' ? 'selected' : '' }}>Tamamlandı</option>
+                            <option value="Cancelled" {{ $order->status == 'Cancelled' ? 'selected' : '' }}>İptal Edildi</option>
                         </select>
-                        <button type="submit" class="btn-success">Güncelle</button>
+                        <button type="submit" class="btn-success">Güncelle ✔</button>
                     </form>
                 </div>
             </div>
@@ -125,7 +141,7 @@
     </div>
 
     <div class="card">
-        <div class="card-header" style="background-color: #5a5c69;">Sipariş İçeriği (Ürünler)</div>
+        <div class="card-header" style="background-color: #5a5c69;">🛒 Sipariş İçeriği (Ürünler)</div>
         <div class="card-body" style="padding: 0;">
             <table class="items-table">
                 <thead>
@@ -140,30 +156,30 @@
                 <tbody>
                     @forelse ($order->items as $item)
                     <tr>
-                        <td>{{ $item->product_id }}</td>
-                        <td><strong>{{ $item->product_title }}</strong></td>
+                        <td style="color: #666;">#{{ $item->product_id }}</td>
+                        <td><strong style="color: #5d4037;">{{ $item->product_title }}</strong></td>
                         <td class="text-center">{{ number_format($item->price, 2) }} ₺</td>
-                        <td class="text-center">{{ $item->quantity }}</td>
-                        <td class="text-right" style="font-weight: bold; color: #4e73df;">{{ number_format($item->total, 2) }} ₺</td>
+                        <td class="text-center"><strong>{{ $item->quantity }}</strong></td>
+                        <td class="text-right" style="font-weight: bold; color: #4e73df; font-size: 15px;">{{ number_format($item->total, 2) }} ₺</td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="text-center" style="padding: 20px; color: #666;">Bu siparişe ait ürün bulunamadı.</td>
+                        <td colspan="5" class="text-center" style="padding: 30px; color: #888; font-style: italic;">Bu siparişe ait ürün bulunamadı.</td>
                     </tr>
                     @endforelse
                 </tbody>
-                <tfoot>
+                <tfoot style="background-color: #fdfaf6;">
                     <tr>
-                        <th colspan="4" class="text-right">Ara Toplam:</th>
-                        <th class="text-right">{{ number_format($order->subtotal, 2) }} ₺</th>
+                        <th colspan="4" class="text-right" style="padding-top: 15px;">Ara Toplam:</th>
+                        <th class="text-right" style="padding-top: 15px;">{{ number_format($order->subtotal, 2) }} ₺</th>
                     </tr>
                     <tr>
-                        <th colspan="4" class="text-right">Kargo Ücreti:</th>
-                        <th class="text-right">{{ number_format($order->shipping_price, 2) }} ₺</th>
+                        <th colspan="4" class="text-right" style="color: #e65100;">Kargo Ücreti:</th>
+                        <th class="text-right" style="color: #e65100;">{{ number_format($order->shipping_price, 2) }} ₺</th>
                     </tr>
                     <tr>
-                        <th colspan="4" class="text-right" style="font-size: 18px;">Genel Toplam:</th>
-                        <th class="text-right" style="font-size: 20px; color: #1cc88a;">{{ number_format($order->total, 2) }} ₺</th>
+                        <th colspan="4" class="text-right" style="font-size: 18px; padding-bottom: 15px;">Genel Toplam:</th>
+                        <th class="text-right" style="font-size: 22px; color: #1cc88a; padding-bottom: 15px;">{{ number_format($order->total, 2) }} ₺</th>
                     </tr>
                 </tfoot>
             </table>
