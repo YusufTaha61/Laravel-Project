@@ -25,7 +25,7 @@ class AdminProductController extends Controller
     {
         $data = new Product();
         $data->category_id = $request->category_id;
-        $data->user_id = 1; // Senin admin ID'n
+        $data->user_id = 1; // Admin user ID
         $data->title = $request->title;
         $data->keywords = $request->keywords;
         $data->description = $request->description;

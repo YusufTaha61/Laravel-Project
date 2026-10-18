@@ -15,12 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Senin Kendi Orijinal Admin Hesabın
-        // E-posta ve şifre alanını kendi kullandığın orijinal bilgilerle değiştirebilirsin
+        // Admin account
         $admin = User::create([
             'name' => 'Yusuf Taha Çebi',
-            'email' => 'yusuf@test.com', // Buraya kendi asıl e-postanı yazabilirsin
-            'password' => Hash::make('12345677'), // Buraya kendi asıl şifreni yazabilirsin
+            'email' => 'yusuf@test.com',
+            'password' => Hash::make('12345677'),
             'role' => 'admin', 
         ]);
 
