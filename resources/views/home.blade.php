@@ -219,7 +219,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; {{ date('Y') }} Kahve Dükkanım. Tüm hakları saklıdır. | Geliştirici: Yusuf Taha Çebi (20222022788)
+            &copy; {{ date('Y') }} Kahve Dükkanım. Tüm hakları saklıdır. | Geliştirici: Yusuf Taha Çebi
         </div>
     </div>
 </body>
