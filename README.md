@@ -16,6 +16,8 @@ To review the admin panel features (Order Management, Product Management, etc.),
 ## 📌 About the Project
 This project is a dynamic and scalable full-stack B2C e-commerce application developed using the Laravel framework. The system is designed with a secure Role-Based Access Control (RBAC) architecture to serve two main user types: Customers (User) and Administrators (Admin). 
 
+![Home page](docs/screenshots/home.png)
+
 ## 🚀 Key Features (Current State)
 - **Premium UI/UX Design:** A custom-designed, fully responsive interface featuring a warm, wood-textured, and semi-transparent (glassmorphism) aesthetic tailored for a boutique coffee shop experience.
 - **User Authentication & Profile Management:** Secure registration, login, and account management processes utilizing Laravel Breeze, with database-driven `admin` and `user` role distinctions.
@@ -31,6 +33,14 @@ This project is a dynamic and scalable full-stack B2C e-commerce application dev
 - Customer Order History and Tracking Dashboard (UI enhancements)
 - Advanced Admin Analytics and Sales Reporting
 - Quality Assurance (QA) Tests and Advanced Form Validations
+
+## 📸 Screenshots
+
+| Product detail | Admin order management |
+|---|---|
+| ![Product detail](docs/screenshots/product.png) | ![Admin orders](docs/screenshots/admin-orders.png) |
+
+![Order detail](docs/screenshots/order-detail.png)
 
 ## 💻 Technologies Used
 - **Backend:** PHP 8.x, Laravel 10.x
